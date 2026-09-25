@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You 🤍</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400&family=Parisienne&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #120f0f;
+    color: #f5eee8;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.page {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    padding: 35px 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.content {
+    width: 100%;
+    animation: fadeIn 1.2s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.small {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #a99588;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.babe {
+    font-family: 'Parisienne', cursive;
+    font-size: 70px;
+    color: #f1ddd0;
+    margin-bottom: 18px;
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #cfc3bb;
+}
+
+.divider {
+    width: 45px;
+    height: 1px;
+    background: #806d61;
+    margin: 28px auto;
+}
+
+button {
+    margin-top: 30px;
+    padding: 14px 35px;
+    background: transparent;
+    color: #eee4dc;
+    border: 1px solid #806d61;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+button:hover {
+    background: #eee4dc;
+    color: #120f0f;
+}
+
+.lock {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    max-width: 280px;
+    margin-top: 20px;
+    padding: 15px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #806d61;
+    outline: none;
+    color: white;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 3px;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: #75675f;
+    letter-spacing: 2px;
+}
+
+.error {
+    color: #b99a91;
+    font-size: 12px;
+    margin-top: 18px;
+    display: none;
+}
+
+.letter {
+    text-align: left;
+    background: rgba(255,255,255,.025);
+    padding: 30px 25px;
+    border: 1px solid rgba(255,255,255,.07);
+}
+
+.letter p {
+    margin-bottom: 18px;
+}
+
+.signature {
+    font-family: 'Parisienne', cursive;
+    font-size: 28px;
+    color: #e4d4c8;
+    margin-top: 25px;
+}
+
+.heart {
+    font-size: 35px;
+    animation: heartbeat 1.5s infinite;
+}
+
+/* TERMS POPUP */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    z-index: 10;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 390px;
+    background: #1c1717;
+    border: 1px solid #806d61;
+    padding: 32px 25px;
+    text-align: left;
+    animation: popIn .4s ease;
+}
+
+.modal-box h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.terms {
+    list-style: none;
+}
+
+.terms li {
+    color: #cfc3bb;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.accept {
+    text-align: center;
+}
+
+.accept button {
+    margin-top: 20px;
+}
+
+.accepted {
+    display: none;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    color: #eee4dc;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- LANDING -->
+    <div class="content" id="landing">
+
+        <div class="small">A little something for my</div>
+
+        <div class="babe">Babe</div>
+
+        <div class="divider"></div>
+
+        <p>
+            Some things are better discovered<br>
+            than explained.
+        </p>
+
+        <button onclick="showPassword()">Continue</button>
+
+    </div>
+
+
+    <!-- PASSWORD -->
+    <div class="content hidden" id="passwordPage">
+
+        <div class="lock">♢</div>
+
+        <div class="small">Private</div>
+
+        <h2>You know the code.</h2>
+
+        <p>
+            Here's a little hint for you...<br>
+            <strong>foodandSHOW; as it is</strong>
+        </p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            maxlength="20"
+            onkeydown="if(event.key==='Enter') unlock()"
+        >
+
+        <br>
+
+        <button onclick="unlock()">Unlock</button>
+
+        <div class="error" id="error">
+            Seriously? 😒
+        </div>
+
+    </div>
+
+
+    <!-- WELCOME -->
+    <div class="content hidden" id="welcome">
+
+        <div class="small">Access granted</div>
+
+        <h1>Hey,<br>handsome.</h1>
+
+        <div class="divider"></div>
+
+        <p>
+            Took you long enough!! 😌
+        </p>
+
+        <button onclick="showLetter()">There's something for you</button>
+
+    </div>
+
+
+    <!-- LETTER -->
+    <div class="content hidden" id="letterPage">
+
+        <div class="small">From me to you</div>
+
+        <div class="letter">
+
+            <p>My love ❤️,</p>
+
+            <p>
+                I just wanted to gloat a little that I can actually do this.
+                😌 Nothing much. Just casually making a website for my
+                boyfriend because apparently I have reached this level of
+                nerd now. 😂
+            </p>
+
+            <p>
+                Okay, I'm joking. ❤️
+            </p>
+
+            <p>
+                I love you❤️, and I'm so happy that you are mine. 🥹🤍
+                And the fact that I can make you hard just by talking to you?
+                That's a flex by the way. 😌😂
+            </p>
+
+            <p>
+                So keep up with me, because I think I'm only going to become
+                more fun the older I get. 😏😂 Or you can always go back to
+                being boring. Your choice. 🤷🏽‍♀️
+            </p>
+
+            <p>
+                Thank you for being a part of my journey as I grow.🤍
+                I hope we get to grow together, experience life together,
+                and see all the versions of ourselves that we're still
+                becoming. 🥹
+            </p>
+
+            <p>
+                I love you, my love. ❤️ And may the Lord keep you for me. 🙏🏽🤍
+            </p>
+
+            <div class="signature">
+                Always yours ♡; wifey
+            </div>
+
+        </div>
+
+        <button onclick="showFinal()">One last thing</button>
+
+    </div>
+
+
+    <!-- FINAL -->
+    <div class="content hidden" id="finalPage">
+
+        <div class="heart">♡</div>
+
+        <div class="small">End of file</div>
+
+        <h2>
+            You are<br>
+            my favorite person.
+        </h2>
+
+        <div class="divider"></div>
+
+        <p>
+            That's it.<br>
+            No hidden terms and conditions.
+        </p>
+
+        <p style="margin-top:20px;">
+            Except maybe one...
+        </p>
+
+        <button onclick="openTerms()">Read the terms</button>
+
+    </div>
+
+</div>
+
+
+<!-- TERMS MODAL -->
+
+<div class="modal hidden" id="termsModal">
+
+    <div class="modal-box">
+
+        <h2>Terms & Conditions</h2>
+
+        <ul class="terms">
+
+            <li>1. As you know, you are stuck with me. 🤍</li>
+
+            <li>2. You must continue loving me. ❤️</li>
+
+            <li>3. You are required to tolerate my moods. 😌</li>
+
+            <li>4. I reserve the right to annoy you indefinitely. 😂</li>
+
+            <li>5. No refunds. Absolutely none.</li>
+
+            <li>
+                6. By continuing this relationship, you acknowledge that
+                I am, in fact, a lot of fun. 😏
+            </li>
+
+        </ul>
+
+        <div class="accept">
+
+            <button onclick="acceptTerms()">☑ I ACCEPT</button>
+
+            <div class="accepted" id="accepted">
+                Good choice. 🤍<br><br>
+                There was never another option anyway. 😂
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const correctPassword = "cakeandID";
+
+function hideAll() {
+    document.querySelectorAll(".content").forEach(page => {
+        page.classList.add("hidden");
+    });
+}
+
+function showPassword() {
+    hideAll();
+    document.getElementById("passwordPage").classList.remove("hidden");
+}
+
+function unlock() {
+
+    const entered = document.getElementById("password").value;
+    const error = document.getElementById("error");
+
+    if (entered === correctPassword) {
+
+        hideAll();
+
+        document.getElementById("welcome").classList.remove("hidden");
+
+    } else {
+
+        error.style.display = "block";
+
+        document.getElementById("password").value = "";
+
+    }
+}
+
+function showLetter() {
+    hideAll();
+    document.getElementById("letterPage").classList.remove("hidden");
+}
+
+function showFinal() {
+    hideAll();
+    document.getElementById("finalPage").classList.remove("hidden");
+}
+
+function openTerms() {
+    document.getElementById("termsModal").classList.remove("hidden");
+}
+
+function acceptTerms() {
+    document.querySelector(".terms").style.display = "none";
+    document.querySelector(".modal-box h2").textContent = "Agreement accepted.";
+    document.querySelector(".accept button").style.display = "none";
+    document.getElementById("accepted").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
